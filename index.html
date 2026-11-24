@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown Lock Screen Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="studio">
+    <!-- Left Panel: Controls -->
+    <aside class="panel">
+      <div class="panel-header">
+        <h1>Countdown Lock Screen</h1>
+        <p>Plan T-minus milestones, style your wallpaper, and export.</p>
+      </div>
+
+      <div class="field-group">
+        <label for="goal-input">Goal / Deadline Name</label>
+        <input id="goal-input" type="text" value="Final Exam" placeholder="e.g., Final Exam or Launch" />
+      </div>
+
+      <div class="field-group">
+        <label>Target Date &amp; Time</label>
+        <div class="datetime-row">
+          <input id="date-input" type="date" />
+          <input id="time-input" type="time" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Aspect Ratio</label>
+        <div class="segmented">
+          <button id="ratio-mobile" type="button" class="active">9:16 Phone</button>
+          <button id="ratio-desktop" type="button">16:9 Desktop</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Color Theme</label>
+        <div class="theme-row">
+          <button type="button" class="theme-chip active" data-theme="slate-gold">Slate &amp; Gold</button>
+          <button type="button" class="theme-chip" data-theme="midnight">Midnight</button>
+          <button type="button" class="theme-chip" data-theme="botanical">Botanical</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="bg-upload">Custom Background Image (Optional)</label>
+        <input id="bg-upload" type="file" accept="image/*" />
+      </div>
+
+      <div class="field-group">
+        <div class="label-row">
+          <label>Milestones</label>
+          <button id="regen-btn" type="button" class="link-btn">Auto T-Minus</button>
+        </div>
+        <div id="milestone-editor" class="milestone-editor"></div>
+        <div class="add-row">
+          <input id="new-milestone-label" type="text" placeholder="Add milestone (e.g., Practice test)" />
+          <input id="new-milestone-offset" type="number" value="2" min="0" max="365" title="Days before deadline" />
+          <button id="add-milestone-btn" type="button">Add</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="download-png-btn" type="button" class="primary-btn">Download Wallpaper (PNG)</button>
+        <button id="download-ics-btn" type="button" class="secondary-btn">Export Reminders (.ICS)</button>
+      </div>
+    </aside>
+
+    <!-- Right Panel: Live Lock Screen Preview -->
+    <main class="stage">
+      <div id="lockscreen" class="lockscreen ratio-9-16 theme-slate-gold">
+        <div class="clock-zone">
+          <div id="live-clock" class="clock-time">10:09</div>
+          <div id="live-date" class="clock-date">Mon, Nov 23</div>
+        </div>
+
+        <div class="hero-card">
+          <div class="eyebrow">T-MINUS COUNTDOWN</div>
+          <h2 id="preview-goal" class="goal-title">FINAL EXAM</h2>
+          <div class="days-pill">
+            <span id="preview-days">--</span>
+            <small>DAYS LEFT</small>
+          </div>
+          <div id="live-countdown" class="live-countdown">00d 00h 00m 00s</div>
+        </div>
+
+        <div class="checklist-card">
+          <div class="checklist-title">MILESTONES</div>
+          <ul id="preview-list" class="checklist"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Hidden canvas used to render high-resolution PNG wallpapers -->
+  <canvas id="export-canvas" class="hidden-canvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
